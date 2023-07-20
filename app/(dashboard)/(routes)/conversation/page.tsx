@@ -17,6 +17,8 @@ import axios from "axios";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/loader";
 import { Empty } from "@/components/ui/empty";
+import { BotAvatar } from "@/components/bot-avatar";
+import { UserAvatar } from "@/components/user-avatar";
 
 const Conversation = () => {
   const router = useRouter();
@@ -39,6 +41,7 @@ const Conversation = () => {
       const response = await axios.post("/api/conversation", {
         messages: newMessages,
       });
+      console.log(response);
       setMessages((current) => [...current, userMessage, response.data]);
       form.reset();
     } catch (error: any) {
@@ -51,6 +54,8 @@ const Conversation = () => {
       router.refresh();
     }
   };
+
+  console.log(messages);
   return (
     <div>
       <Heading
@@ -124,7 +129,7 @@ const Conversation = () => {
                     : "bg-muted"
                 )}
               >
-                {/* {message.role === "user" ? <UserAvatar /> : <BotAvatar />} */}
+                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                 <p className='text-sm'>{message.content}</p>
               </div>
             ))}
