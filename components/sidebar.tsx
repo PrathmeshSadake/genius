@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Montserrat } from "next/font/google";
 import {
   Code,
   ImageIcon,
@@ -14,6 +13,7 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { FreeCounter } from "./free-counter";
 
 const routes = [
   {
@@ -35,18 +35,6 @@ const routes = [
     href: "/image",
   },
   {
-    label: "Video Generation",
-    icon: VideoIcon,
-    color: "text-orange-700",
-    href: "/video",
-  },
-  {
-    label: "Music Generation",
-    icon: Music,
-    color: "text-emerald-500",
-    href: "/music",
-  },
-  {
     label: "Code Generation",
     icon: Code,
     color: "text-green-700",
@@ -59,7 +47,11 @@ const routes = [
   },
 ];
 
-export const Sidebar = () => {
+interface SidebarProps {
+  apiLimitCount: number;
+}
+
+export const Sidebar = ({ apiLimitCount = 0 }: SidebarProps) => {
   const pathname = usePathname();
 
   return (
@@ -91,6 +83,7 @@ export const Sidebar = () => {
           ))}
         </div>
       </div>
+      <FreeCounter apiLimitCount={apiLimitCount} />
     </div>
   );
 };
