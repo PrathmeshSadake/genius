@@ -4,6 +4,7 @@ import { absoluteUrl } from "@/lib/utils";
 import prismadb from "@/lib/prismadb";
 import { stripe } from "@/lib/stripe";
 
+export const dynamic = "force-dynamic";
 const settingsUrl = absoluteUrl("/settings");
 
 export async function GET() {
